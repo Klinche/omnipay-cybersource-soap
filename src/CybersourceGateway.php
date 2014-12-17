@@ -28,10 +28,12 @@ class CybersourceGateway extends AbstractGateway
 
     /**
      * @param string $merchantId
+     * @return $this
      */
     public function setMerchantId($merchantId)
     {
         $this->setParameter('merchantId', $merchantId);
+        return $this;
     }
 
     /**
@@ -44,10 +46,12 @@ class CybersourceGateway extends AbstractGateway
 
     /**
      * @param string $username
+     * @return $this
      */
     public function setUsername($username)
     {
         $this->setParameter('username', $username);
+        return $this;
     }
 
     /**
@@ -60,10 +64,12 @@ class CybersourceGateway extends AbstractGateway
 
     /**
      * @param string $transactionKey
+     * @return $this
      */
     public function setTransactionKey($transactionKey)
     {
         $this->setParameter('transactionKey', $transactionKey);
+        return $this;
     }
 
     /**

@@ -156,6 +156,22 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     /**
      * @return \stdClass
      */
+    protected function createBankAccount()
+    {
+        /** @var BankAccount $bankAccount */
+        $bankAccount = $this->getBankAccount();
+
+        $cyberSourceBankAccount = new \stdClass();
+        $cyberSourceBankAccount->accountNumber = $bankAccount->getAccountNumber();
+        $cyberSourceBankAccount->accountType = $bankAccount->getBankAccountType();
+        $cyberSourceBankAccount->bankTransitNumber = $bankAccount->getRoutingNumber();
+
+        return $cyberSourceBankAccount;
+    }
+
+    /**
+     * @return \stdClass
+     */
     protected function createBillingAddress()
     {
         /** @var \Omnipay\Common\CreditCard $creditCard */

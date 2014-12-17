@@ -25,15 +25,6 @@ class BankAccount
     const ACCOUNT_TYPE_BUSINESS_CHECKING = 'BUSINESSCHECKING';
     const ACCOUNT_TYPE_SAVINGS = 'SAVINGS';
 
-    const ACCOUNT_TYPE_CC_AE = 'American Express';
-    const ACCOUNT_TYPE_CC_CARTEBLANCHE = 'Carte Blanche';
-    const ACCOUNT_TYPE_CC_DISCOVER = 'Discover';
-    const ACCOUNT_TYPE_CC_DINERSCLUB = 'Diners Club';
-    const ACCOUNT_TYPE_CC_JCB = 'JCB';
-    const ACCOUNT_TYPE_CC_MASTERCARD = 'MasterCard';
-    const ACCOUNT_TYPE_CC_PAYPAL = 'PayPal';
-    const ACCOUNT_TYPE_CC_VISA = 'Visa';
-
 
     /**
      * @var \Symfony\Component\HttpFoundation\ParameterBag

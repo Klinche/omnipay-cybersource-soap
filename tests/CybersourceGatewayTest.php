@@ -14,20 +14,20 @@ class CybersourceGatewayTest extends GatewayTestCase
     {
         parent::setUp();
 
-        $bankAccountPayee = new BankAccount();
-        $bankAccountPayee->setAccountNumber("0512-351217");
-        $bankAccountPayee->setRoutingNumber("4271-04991");
-        $bankAccountPayee->setBankName("Mikey National Bank");
-        $bankAccountPayee->setBankAccountType(BankAccount::ACCOUNT_TYPE_CHECKING);
-        $bankAccountPayee->setBillingFirstName("Mikey");
-        $bankAccountPayee->setBillingLastName("DABLname");
-        $bankAccountPayee->setName("Mikey DABLname");
-        $bankAccountPayee->setBillingAddress1("15505 Pennsylvania Ave.");
-        $bankAccountPayee->setBillingCity("Washington DC");
-        $bankAccountPayee->setBillingName("FED-Payor");
-        $bankAccountPayee->setBillingPostcode("20003");
-        $bankAccountPayee->setBillingState("DC, NE");
-        $bankAccountPayee->setCompany("DAB2LLC");
+        $bankAccount = new BankAccount();
+        $bankAccount->setAccountNumber("12345678");
+        $bankAccount->setRoutingNumber("112200439");
+        $bankAccount->setBankName("Mikey National Bank");
+        $bankAccount->setBankAccountType(BankAccount::ACCOUNT_TYPE_CHECKING);
+        $bankAccount->setBillingFirstName("Mikey");
+        $bankAccount->setBillingLastName("DABLname");
+        $bankAccount->setName("Mikey DABLname");
+        $bankAccount->setBillingAddress1("15505 Pennsylvania Ave.");
+        $bankAccount->setBillingCity("Washington DC");
+        $bankAccount->setBillingName("FED-Payor");
+        $bankAccount->setBillingPostcode("20003");
+        $bankAccount->setBillingState("DC, NE");
+        $bankAccount->setCompany("DAB2LLC");
 
 
         $creditCard = new CreditCard();
@@ -66,6 +66,20 @@ class CybersourceGatewayTest extends GatewayTestCase
         /** @var \Omnipay\Cybersource\Message\PurchaseRequest $request */
         $request = $this->gateway->purchase(array_merge($defaultOptions, $purchaseOptions));
         $response = $request->send();
+
+        $this->assertEquals(true, $response->isSuccessful());
+
+        $purchaseOptions = array(
+            'amount' => '12.00',
+            'bankAccount' => $bankAccount,
+            'merchantReferenceCode' => uniqid()
+        );
+
+        /** @var \Omnipay\Cybersource\Message\PurchaseRequest $request */
+        $request = $this->gateway->purchase(array_merge($defaultOptions, $purchaseOptions));
+        $response = $request->send();
+
+        var_dump('RESPONSE BANK:',$response);
 
         $this->assertEquals(true, $response->isSuccessful());
     }

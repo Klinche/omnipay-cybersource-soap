@@ -22,7 +22,7 @@ class CybersourceResponse extends AbstractResponse
     private $cybersourceResponseReasonCode = "";
 
 
-    private $avs_codes = array(
+    private static $avs_codes = array(
         'A' => 'Partial match: Street address matches, but 5-digit and 9-digit postal codes do not match.',
         'B' => 'Partial match: Street address matches, but postal code is not verified.',
         'C' => 'No match: Street address and postal code do not match.',
@@ -51,7 +51,7 @@ class CybersourceResponse extends AbstractResponse
         '2' => 'Unrecognized: The processor returned an unrecognized value for the AVS response.',
     );
 
-    private $cvn_codes = array(
+    private static $cvn_codes = array(
         'D' => 'The transaction was determined to be suspicious by the issuing bank.',
         'I' => 'The CVN failed the processor\'s data validation check.',
         'M' => 'The CVN matched.',
@@ -65,7 +65,7 @@ class CybersourceResponse extends AbstractResponse
         '3' => 'No result code was returned by the processor.',
     );
 
-    private $result_codes = array(
+    private static $result_codes = array(
         '100' => 'Successful transaction.',
         '101' => 'The request is missing one or more required fields.',
         '102' => 'One or more fields in the request contains invalid data.',
@@ -136,8 +136,9 @@ class CybersourceResponse extends AbstractResponse
                 }
 
                 $this->statusOK = false;
-                $this->$cybersourceResponseMessage =  $missing_fields;
+                $this->cybersourceResponseMessage =  $missing_fields;
                 $this->cybersourceResponseReasonCode = $this->response->reasonCode;
+                return;
             }
 
             // customize the error message if the reason code indicates a field is invalid
@@ -156,21 +157,22 @@ class CybersourceResponse extends AbstractResponse
                 }
 
                 $this->statusOK = false;
-                $this->$cybersourceResponseMessage =  $invalid_fields;
+                $this->cybersourceResponseMessage =  $invalid_fields;
                 $this->cybersourceResponseReasonCode = $this->response->reasonCode;
+                return;
             }
 
             // otherwise, just throw a generic declined exception
             if ($this->response->decision == 'ERROR') {
                 // note that ERROR means some kind of system error or the processor rejected invalid data - it probably doesn't mean the card was actually declined
                 $this->statusOK = false;
-                $this->$cybersourceResponseMessage =  $this->result_codes[ $this->response->reasonCode ];
+                $this->cybersourceResponseMessage =  self::$result_codes[ $this->response->reasonCode ];
                 $this->cybersourceResponseReasonCode = $this->response->reasonCode;
             }
             else {
                 // declined, however, actually means declined. this would be decision 'REJECT', btw.
                 $this->statusOK = false;
-                $this->$cybersourceResponseMessage =  $this->result_codes[ $this->response->reasonCode ];
+                $this->cybersourceResponseMessage =  self::$result_codes[ $this->response->reasonCode ];
                 $this->cybersourceResponseReasonCode = $this->response->reasonCode;
             }
         } else {
