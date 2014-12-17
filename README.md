@@ -2,7 +2,7 @@
 
 **Cybersource driver for the Omnipay PHP payment processing library**
 
-[![Build Status](https://travis-ci.org/dabsquared/omnipay-cybersource-soap.png?branch=master)](https://travis-ci.org/dabsquared/omnipay-cybersource-soap)
+[![Build Status](https://travis-ci.org/DABSquared/omnipay-cybersource-soap.svg?branch=master)](https://travis-ci.org/dabsquared/omnipay-cybersource-soap)
 [![Latest Stable Version](https://poser.pugx.org/dabsquared/omnipay-cybersource-soap/version.png)](https://packagist.org/dabsquared/omnipay-cybersource-soap/)
 [![Total Downloads](https://poser.pugx.org/dabsquared/omnipay-cybersource-soap/d/total.png)](https://packagist.org/dabsquared/omnipay-cybersource-soap/)
 
