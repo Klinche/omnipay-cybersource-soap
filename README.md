@@ -2,9 +2,9 @@
 
 **Cybersource driver for the Omnipay PHP payment processing library**
 
-[![Build Status](https://travis-ci.org/dioscouri/omnipay-cybersource.png?branch=master)](https://travis-ci.org/eileenmcnaughton/omnipay-cybersource)
-[![Latest Stable Version](https://poser.pugx.org/dioscouri/omnipay-cybersource/version.png)](https://packagist.org/dioscouri/omnipay-cybersource/)
-[![Total Downloads](https://poser.pugx.org/dioscouri/omnipay-cybersource/d/total.png)](https://packagist.org/dioscouri/omnipay-cybersource/)
+[![Build Status](https://travis-ci.org/dabsquared/omnipay-cybersource.png?branch=master)](https://travis-ci.org/dabsquared/omnipay-cybersource)
+[![Latest Stable Version](https://poser.pugx.org/dabsquared/omnipay-cybersource/version.png)](https://packagist.org/dabsquared/omnipay-cybersource/)
+[![Total Downloads](https://poser.pugx.org/dabsquared/omnipay-cybersource/d/total.png)](https://packagist.org/dabsquared/omnipay-cybersource/)
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
 processing library for PHP 5.3+. This package implements 2Checkout support for Omnipay.
@@ -17,7 +17,7 @@ to your `composer.json` file:
 ```json
 {
     "require": {
-        "dioscouri/omnipay-cybersource": "~2.0"
+        "dabsquared/omnipay-cybersource": "dev-master"
     }
 }
 ```
