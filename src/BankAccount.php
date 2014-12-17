@@ -21,9 +21,9 @@ class BankAccount
 {
 
 
-    const ACCOUNT_TYPE_CHECKING = 'CHECKING';
-    const ACCOUNT_TYPE_BUSINESS_CHECKING = 'BUSINESSCHECKING';
-    const ACCOUNT_TYPE_SAVINGS = 'SAVINGS';
+    const ACCOUNT_TYPE_CHECKING = 'C';
+    const ACCOUNT_TYPE_BUSINESS_CHECKING = 'X';
+    const ACCOUNT_TYPE_SAVINGS = 'S';
 
 
     /**
@@ -32,7 +32,7 @@ class BankAccount
     protected $parameters;
 
     /**
-     * Create a new CreditCard object using the specified parameters
+     * Create a new BankAccount object using the specified parameters
      *
      * @param array $parameters An array of parameters to set on the new object
      */
@@ -57,21 +57,6 @@ class BankAccount
         Helper::initialize($this, $parameters);
 
         return $this;
-    }
-
-    public function getAccountTypeBusinessChecking()
-    {
-        return BankAccount::ACCOUNT_TYPE_BUSINESS_CHECKING;
-    }
-
-    public function getAccountTypeSavings()
-    {
-        return BankAccount::ACCOUNT_TYPE_SAVINGS;
-    }
-
-    public function getAccountTypeChecking()
-    {
-        return BankAccount::ACCOUNT_TYPE_CHECKING;
     }
 
     public function getParameters()
