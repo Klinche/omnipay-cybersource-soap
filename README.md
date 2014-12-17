@@ -3,8 +3,11 @@
 **Cybersource driver for the Omnipay PHP payment processing library**
 
 [![Build Status](https://travis-ci.org/DABSquared/omnipay-cybersource-soap.svg?branch=master)](https://travis-ci.org/dabsquared/omnipay-cybersource-soap)
-[![Latest Stable Version](https://poser.pugx.org/dabsquared/omnipay-cybersource-soap/version.png)](https://packagist.org/dabsquared/omnipay-cybersource-soap/)
-[![Total Downloads](https://poser.pugx.org/dabsquared/omnipay-cybersource-soap/d/total.png)](https://packagist.org/dabsquared/omnipay-cybersource-soap/)
+[![Latest Stable Version](https://poser.pugx.org/dabsquared/omnipay-cybersource-soap/v/stable.svg)](https://packagist.org/packages/dabsquared/omnipay-cybersource-soap)
+[![Latest Unstable Version](https://poser.pugx.org/dabsquared/omnipay-cybersource-soap/v/unstable.svg)](https://packagist.org/packages/dabsquared/omnipay-cybersource-soap)
+[![Total Downloads](https://poser.pugx.org/dabsquared/omnipay-cybersource-soap/downloads.svg)](https://packagist.org/packages/dabsquared/omnipay-cybersource-soap)
+[![License](https://poser.pugx.org/dabsquared/omnipay-cybersource-soap/license.svg)](https://packagist.org/packages/dabsquared/omnipay-cybersource-soap)
+
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
 processing library for PHP 5.3+. This package implements 2Checkout support for Omnipay.
