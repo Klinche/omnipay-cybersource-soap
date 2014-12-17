@@ -177,17 +177,89 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         /** @var \Omnipay\Common\CreditCard $creditCard */
         $creditCard = $this->getCard();
 
+        /** @var BankAccount $bankAccount */
+        $bankAccount = $this->getBankAccount();
+
         $cyberSourceBillingAddress = new \stdClass();
 
-        $cyberSourceBillingAddress->firstName = $creditCard->getBillingFirstName();
-        $cyberSourceBillingAddress->lastName = $creditCard->getBillingLastName();
-        $cyberSourceBillingAddress->street1 = $creditCard->getBillingAddress1();
-        $cyberSourceBillingAddress->street2 = $creditCard->getBillingAddress2();
-        $cyberSourceBillingAddress->city = $creditCard->getBillingCity();
-        $cyberSourceBillingAddress->state = $creditCard->getBillingState();
-        $cyberSourceBillingAddress->postalCode = $creditCard->getBillingPostcode();
-        $cyberSourceBillingAddress->country = $creditCard->getBillingCountry();
-        $cyberSourceBillingAddress->email = $creditCard->getEmail();
+        if(!is_null($creditCard)) {
+            $cyberSourceBillingAddress->firstName = $creditCard->getBillingFirstName();
+            $cyberSourceBillingAddress->lastName = $creditCard->getBillingLastName();
+
+            if(!is_null($creditCard->getBillingAddress1())) {
+                $cyberSourceBillingAddress->street1 = $creditCard->getBillingAddress1();
+            }
+
+            if(!is_null($creditCard->getBillingAddress2())) {
+                $cyberSourceBillingAddress->street2 = $creditCard->getBillingAddress2();
+            }
+
+            if(!is_null($creditCard->getBillingCity())) {
+                $cyberSourceBillingAddress->city = $creditCard->getBillingCity();
+            }
+
+            if(!is_null($creditCard->getBillingState())) {
+                $cyberSourceBillingAddress->state = $creditCard->getBillingState();
+            }
+
+            if(!is_null($creditCard->getBillingPostcode())) {
+                $cyberSourceBillingAddress->postalCode = $creditCard->getBillingPostcode();
+            }
+
+            if(!is_null($creditCard->getBillingCountry())) {
+                $cyberSourceBillingAddress->country = $creditCard->getBillingCountry();
+            }
+
+            if(!is_null($creditCard->getEmail())) {
+                $cyberSourceBillingAddress->email = $creditCard->getEmail();
+            }
+
+            if(!is_null($creditCard->getBillingPhone())) {
+                $cyberSourceBillingAddress->phoneNumber = $creditCard->getBillingPhone();
+            }
+        } else if(!is_null($bankAccount)){
+            if(!is_null($bankAccount->getCompany())) {
+                $cyberSourceBillingAddress->firstName = 'NA';
+                $cyberSourceBillingAddress->lastName = $bankAccount->getCompany();
+                $cyberSourceBillingAddress->company = $bankAccount->getCompany();
+            } else {
+                $cyberSourceBillingAddress->firstName = $bankAccount->getBillingFirstName();
+                $cyberSourceBillingAddress->lastName = $bankAccount->getBillingLastName();
+            }
+
+            if(!is_null($bankAccount->getBillingAddress1())) {
+                $cyberSourceBillingAddress->street1 = $bankAccount->getBillingAddress1();
+            }
+
+            if(!is_null($bankAccount->getBillingAddress2())) {
+                $cyberSourceBillingAddress->street2 = $bankAccount->getBillingAddress2();
+            }
+
+            if(!is_null($bankAccount->getBillingCity())) {
+                $cyberSourceBillingAddress->city = $bankAccount->getBillingCity();
+            }
+
+            if(!is_null($bankAccount->getBillingState())) {
+                $cyberSourceBillingAddress->state = $bankAccount->getBillingState();
+            }
+
+            if(!is_null($bankAccount->getBillingPostcode())) {
+                $cyberSourceBillingAddress->postalCode = $bankAccount->getBillingPostcode();
+            }
+
+            if(!is_null($bankAccount->getBillingCountry())) {
+                $cyberSourceBillingAddress->country = $bankAccount->getBillingCountry();
+            }
+
+            if(!is_null($bankAccount->getEmail())) {
+                $cyberSourceBillingAddress->email = $bankAccount->getEmail();
+            }
+
+            if(!is_null($bankAccount->getBillingPhone())) {
+                $cyberSourceBillingAddress->phoneNumber = $bankAccount->getBillingPhone();
+            }
+
+        }
 
         return $cyberSourceBillingAddress;
     }

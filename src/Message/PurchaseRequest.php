@@ -51,6 +51,8 @@ class PurchaseRequest extends AbstractRequest
             $ecDebitService->run = 'true';
             $this->request->ecDebitService = $ecDebitService;
 
+            // add billing info to the request
+            $this->request->billTo = $this->createBillingAddress();
 
             // add bank account info to the request
             $this->request->check = $this->createBankAccount();

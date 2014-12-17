@@ -26,8 +26,11 @@ class CybersourceGatewayTest extends GatewayTestCase
         $bankAccount->setBillingCity("Washington DC");
         $bankAccount->setBillingName("FED-Payor");
         $bankAccount->setBillingPostcode("20003");
-        $bankAccount->setBillingState("DC, NE");
+        $bankAccount->setBillingState("CA");
+        $bankAccount->setBillingCountry('USA');
+        $bankAccount->setBillingPhone('5555555555');
         $bankAccount->setCompany("DAB2LLC");
+        $bankAccount->setEmail('test@me.com');
 
 
         $creditCard = new CreditCard();
@@ -56,31 +59,35 @@ class CybersourceGatewayTest extends GatewayTestCase
             'transactionKey' => ''
         );
 
+        if($defaultOptions['merchantId'] != '' && $defaultOptions['username'] != '' && $defaultOptions['transactionKey'] != '') {
+            $purchaseOptions = array(
+                'amount' => '12.00',
+                'card' => $creditCard,
+                'merchantReferenceCode' => uniqid()
+            );
 
-        $purchaseOptions = array(
-            'amount' => '12.00',
-            'card' => $creditCard,
-            'merchantReferenceCode' => uniqid()
-        );
+            /** @var \Omnipay\Cybersource\Message\PurchaseRequest $request */
+            $request = $this->gateway->purchase(array_merge($defaultOptions, $purchaseOptions));
+            $response = $request->send();
 
-        /** @var \Omnipay\Cybersource\Message\PurchaseRequest $request */
-        $request = $this->gateway->purchase(array_merge($defaultOptions, $purchaseOptions));
-        $response = $request->send();
+            $this->assertEquals(true, $response->isSuccessful());
 
-        $this->assertEquals(true, $response->isSuccessful());
+            $purchaseOptions = array(
+                'amount' => '12.00',
+                'bankAccount' => $bankAccount,
+                'merchantReferenceCode' => uniqid()
+            );
 
-        $purchaseOptions = array(
-            'amount' => '12.00',
-            'bankAccount' => $bankAccount,
-            'merchantReferenceCode' => uniqid()
-        );
+            /** @var \Omnipay\Cybersource\Message\PurchaseRequest $request */
+            $request = $this->gateway->purchase(array_merge($defaultOptions, $purchaseOptions));
+            $response = $request->send();
 
-        /** @var \Omnipay\Cybersource\Message\PurchaseRequest $request */
-        $request = $this->gateway->purchase(array_merge($defaultOptions, $purchaseOptions));
-        $response = $request->send();
+            var_dump('RESPONSE BANK:',$response);
 
-        var_dump('RESPONSE BANK:',$response);
+            $this->assertEquals(true, $response->isSuccessful());
+        }
 
-        $this->assertEquals(true, $response->isSuccessful());
+
+
     }
 }
