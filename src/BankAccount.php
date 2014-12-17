@@ -19,8 +19,6 @@ use Omnipay\Common\Helper;
  */
 class BankAccount
 {
-
-
     const ACCOUNT_TYPE_CHECKING = 'C';
     const ACCOUNT_TYPE_BUSINESS_CHECKING = 'X';
     const ACCOUNT_TYPE_SAVINGS = 'S';

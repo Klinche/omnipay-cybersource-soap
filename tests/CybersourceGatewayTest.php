@@ -70,6 +70,9 @@ class CybersourceGatewayTest extends GatewayTestCase
             $request = $this->gateway->purchase(array_merge($defaultOptions, $purchaseOptions));
             $response = $request->send();
 
+            var_dump('RESPONSE CREDIT:',$response);
+
+
             $this->assertEquals(true, $response->isSuccessful());
 
             $purchaseOptions = array(
@@ -81,9 +84,7 @@ class CybersourceGatewayTest extends GatewayTestCase
             /** @var \Omnipay\Cybersource\Message\PurchaseRequest $request */
             $request = $this->gateway->purchase(array_merge($defaultOptions, $purchaseOptions));
             $response = $request->send();
-
-            var_dump('RESPONSE BANK:',$response);
-
+            
             $this->assertEquals(true, $response->isSuccessful());
         }
 

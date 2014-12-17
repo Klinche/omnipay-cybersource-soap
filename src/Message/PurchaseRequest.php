@@ -12,10 +12,10 @@ class PurchaseRequest extends AbstractRequest
 {
     public function getData()
     {
-        if(!is_null($this->getCard())) {
+        if (!is_null($this->getCard())) {
             $this->validate('amount', 'card');
             $this->getCard()->validate();
-        } else if(!is_null($this->getBankAccount())) {
+        } elseif (!is_null($this->getBankAccount())) {
             $this->validate('amount', 'bankAccount');
         } else {
             $this->validate('amount', 'bankAccount', 'card');
@@ -27,12 +27,10 @@ class PurchaseRequest extends AbstractRequest
     }
     public function sendData($data)
     {
-
-
-        if(!is_null($this->getCard())) {
+        if (!is_null($this->getCard())) {
             // we want to perform an authorization
             $cc_auth_service = new \stdClass();
-            $cc_auth_service->run = 'true';		// note that it's textual true so it doesn't get cast as an int
+            $cc_auth_service->run = 'true';        // note that it's textual true so it doesn't get cast as an int
             $this->request->ccAuthService = $cc_auth_service;
 
             // and actually charge them
@@ -45,7 +43,7 @@ class PurchaseRequest extends AbstractRequest
 
             // add credit card info to the request
             $this->request->card = $this->createCard();
-        } else if(!is_null($this->getBankAccount())) {
+        } elseif (!is_null($this->getBankAccount())) {
             // and actually charge them
             $ecDebitService = new \stdClass();
             $ecDebitService->run = 'true';

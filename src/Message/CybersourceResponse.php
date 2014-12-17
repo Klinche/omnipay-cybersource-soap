@@ -3,7 +3,6 @@
 namespace Omnipay\Cybersource\Message;
 
 use DOMDocument;
-use Omnipay\Cybersource\ACHReturnRecord;
 use Omnipay\Common\Exception\InvalidResponseException;
 use Omnipay\Common\Message\AbstractResponse;
 use Omnipay\Common\Message\RedirectResponseInterface;
@@ -20,6 +19,95 @@ class CybersourceResponse extends AbstractResponse
     private $statusOK = false;
     private $cybersourceResponseMessage = "";
     private $cybersourceResponseReasonCode = "";
+    private $cybersourceRequestId = "";
+    private $cybersourceRequestToken = "";
+    private $cybersourceProcessorTransactionId = "";
+    private $cybersourceReconciliationId = "";
+    private $cybersourceAuthReconciliationId = "";
+    private $cybersourceAuthRecord = "";
+    private $cybersourceVerificationCode = "";
+    private $cybersourceVerificationCodeRaw = "";
+
+    /**
+     * @return string
+     */
+    public function getCybersourceResponseMessage()
+    {
+        return $this->cybersourceResponseMessage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCybersourceResponseReasonCode()
+    {
+        return $this->cybersourceResponseReasonCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCybersourceRequestId()
+    {
+        return $this->cybersourceRequestId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCybersourceRequestToken()
+    {
+        return $this->cybersourceRequestToken;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCybersourceProcessorTransactionId()
+    {
+        return $this->cybersourceProcessorTransactionId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCybersourceReconciliationId()
+    {
+        return $this->cybersourceReconciliationId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCybersourceAuthReconciliationId()
+    {
+        return $this->cybersourceAuthReconciliationId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCybersourceAuthRecord()
+    {
+        return $this->cybersourceAuthRecord;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCybersourceVerificationCode()
+    {
+        return $this->cybersourceVerificationCode;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCybersourceVerificationCodeRaw()
+    {
+        return $this->cybersourceVerificationCodeRaw;
+    }
+
 
 
     private static $avs_codes = array(
@@ -116,22 +204,18 @@ class CybersourceResponse extends AbstractResponse
 
 
 
-    private function goThroughResponse() {
-
+    private function goThroughResponse()
+    {
         if ($this->response->decision != 'ACCEPT') {
-
             // customize the error message if the reason indicates a field is missing
             if ($this->response->reasonCode == 101) {
-
                 $missing_fields = 'Missing fields: ';
 
                 if (!isset($this->response->missingField)) {
                     $missing_fields = $missing_fields.'Unknown';
-                }
-                else if ( is_array($this->response->missingField)) {
-                    $missing_fields = $missing_fields.implode( ', ', $this->response->missingField );
-                }
-                else {
+                } elseif (is_array($this->response->missingField)) {
+                    $missing_fields = $missing_fields.implode(', ', $this->response->missingField);
+                } else {
                     $missing_fields = $missing_fields.$this->response->missingField;
                 }
 
@@ -143,16 +227,13 @@ class CybersourceResponse extends AbstractResponse
 
             // customize the error message if the reason code indicates a field is invalid
             if ($this->response->reasonCode == 102) {
-
                 $invalid_fields = 'Invalid fields: ';
 
                 if (!isset($this->response->invalidField)) {
                     $invalid_fields = $invalid_fields.'Unknown';
-                }
-                else if (is_array($this->response->invalidField)) {
-                    $invalid_fields = $invalid_fields.implode( ', ', $this->response->invalidField );
-                }
-                else {
+                } elseif (is_array($this->response->invalidField)) {
+                    $invalid_fields = $invalid_fields.implode(', ', $this->response->invalidField);
+                } else {
                     $invalid_fields = $invalid_fields.$this->response->invalidField;
                 }
 
@@ -168,8 +249,7 @@ class CybersourceResponse extends AbstractResponse
                 $this->statusOK = false;
                 $this->cybersourceResponseMessage =  self::$result_codes[ $this->response->reasonCode ];
                 $this->cybersourceResponseReasonCode = $this->response->reasonCode;
-            }
-            else {
+            } else {
                 // declined, however, actually means declined. this would be decision 'REJECT', btw.
                 $this->statusOK = false;
                 $this->cybersourceResponseMessage =  self::$result_codes[ $this->response->reasonCode ];
@@ -177,9 +257,23 @@ class CybersourceResponse extends AbstractResponse
             }
         } else {
             $this->statusOK = true;
+
+            $this->cybersourceRequestId = $this->response->requestID;
+            $this->cybersourceRequestToken = $this->response->requestToken;
+            $this->cybersourceResponseReasonCode = $this->response->reasonCode;
+            $this->cybersourceResponseMessage =  self::$result_codes[ $this->response->reasonCode ];
+
+            if (isset($this->response->ccAuthReply)) {
+                $this->cybersourceAuthReconciliationId = $this->response->ccAuthReply->reconciliationID;
+                $this->cybersourceAuthRecord = $this->response->ccAuthReply->authRecord;
+                $this->cybersourceReconciliationId = $this->response->ccCaptureReply->reconciliationID;
+            } elseif (isset($this->response->ecDebitReply)) {
+                $this->cybersourceReconciliationId = $this->response->ecDebitReply->reconciliationID;
+                $this->cybersourceProcessorTransactionId = $this->response->ecDebitReply->processorTransactionID;
+                $this->cybersourceVerificationCode = $this->response->ecDebitReply->verificationCode;
+                $this->cybersourceVerificationCodeRaw = $this->response->ecDebitReply->verificationCodeRaw;
+            }
         }
-
-
     }
 
     public function isSuccessful()
@@ -196,5 +290,4 @@ class CybersourceResponse extends AbstractResponse
     {
         return $this->cybersourceResponseReasonCode;
     }
-
 }

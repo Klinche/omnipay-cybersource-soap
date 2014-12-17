@@ -69,13 +69,13 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
             ),
         );
 
-        $context = stream_context_create( $context_options );
+        $context = stream_context_create($context_options);
 
         // options we pass into the soap client
         $soap_options = array(
-            'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,		// turn on HTTP compression
-            'encoding' => 'utf-8',		// set the internal character encoding to avoid random conversions
-            'exceptions' => true,		// throw SoapFault exceptions when there is an error
+            'compression' => SOAP_COMPRESSION_ACCEPT | SOAP_COMPRESSION_GZIP | SOAP_COMPRESSION_DEFLATE,        // turn on HTTP compression
+            'encoding' => 'utf-8',        // set the internal character encoding to avoid random conversions
+            'exceptions' => true,        // throw SoapFault exceptions when there is an error
             'connection_timeout' => $this->timeout,
             'stream_context' => $context,
         );
@@ -90,18 +90,16 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 
         try {
             // create the soap client
-            $soap = new \SoapClient( $this->getEndpoint(), $soap_options );
-        }
-        catch ( SoapFault $sf ) {
-            throw new CyberSource_Connection_Exception( $sf->getMessage(), $sf->getCode() );
+            $soap = new \SoapClient($this->getEndpoint(), $soap_options);
+        } catch (SoapFault $sf) {
+            throw new \Exception($sf->getMessage(), $sf->getCode());
         }
 
         // add the wsse token to the soap object, by reference
-        $this->addWsseToken( $soap );
+        $this->addWsseToken($soap);
 
         // save the request so you can get back what was generated at any point
-        var_dump("TRANSACTION", $this->request);
-        $response = $soap->runTransaction( $this->request );
+        $response = $soap->runTransaction($this->request);
 
         return $this->response = new CybersourceResponse($this->request, $response);
     }
@@ -110,8 +108,8 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     /**
      * @return \stdClass
      */
-    protected function createRequest ( ) {
-
+    protected function createRequest()
+    {
         // build the class for the request
         $request = new \stdClass();
 
@@ -142,11 +140,11 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         $cyberSourceCreditCard->expirationMonth = $creditCard->getExpiryMonth();
         $cyberSourceCreditCard->expirationYear = $creditCard->getExpiryYear();
 
-        if(!is_null($creditCard->getCvv())) {
+        if (!is_null($creditCard->getCvv())) {
             $cyberSourceCreditCard->cvNumber = $creditCard->getCvv();
         }
 
-        if(!is_null($this->getCardType())) {
+        if (!is_null($this->getCardType())) {
             $cyberSourceCreditCard->cardType = $this->getCardType();
         }
 
@@ -182,43 +180,43 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 
         $cyberSourceBillingAddress = new \stdClass();
 
-        if(!is_null($creditCard)) {
+        if (!is_null($creditCard)) {
             $cyberSourceBillingAddress->firstName = $creditCard->getBillingFirstName();
             $cyberSourceBillingAddress->lastName = $creditCard->getBillingLastName();
 
-            if(!is_null($creditCard->getBillingAddress1())) {
+            if (!is_null($creditCard->getBillingAddress1())) {
                 $cyberSourceBillingAddress->street1 = $creditCard->getBillingAddress1();
             }
 
-            if(!is_null($creditCard->getBillingAddress2())) {
+            if (!is_null($creditCard->getBillingAddress2())) {
                 $cyberSourceBillingAddress->street2 = $creditCard->getBillingAddress2();
             }
 
-            if(!is_null($creditCard->getBillingCity())) {
+            if (!is_null($creditCard->getBillingCity())) {
                 $cyberSourceBillingAddress->city = $creditCard->getBillingCity();
             }
 
-            if(!is_null($creditCard->getBillingState())) {
+            if (!is_null($creditCard->getBillingState())) {
                 $cyberSourceBillingAddress->state = $creditCard->getBillingState();
             }
 
-            if(!is_null($creditCard->getBillingPostcode())) {
+            if (!is_null($creditCard->getBillingPostcode())) {
                 $cyberSourceBillingAddress->postalCode = $creditCard->getBillingPostcode();
             }
 
-            if(!is_null($creditCard->getBillingCountry())) {
+            if (!is_null($creditCard->getBillingCountry())) {
                 $cyberSourceBillingAddress->country = $creditCard->getBillingCountry();
             }
 
-            if(!is_null($creditCard->getEmail())) {
+            if (!is_null($creditCard->getEmail())) {
                 $cyberSourceBillingAddress->email = $creditCard->getEmail();
             }
 
-            if(!is_null($creditCard->getBillingPhone())) {
+            if (!is_null($creditCard->getBillingPhone())) {
                 $cyberSourceBillingAddress->phoneNumber = $creditCard->getBillingPhone();
             }
-        } else if(!is_null($bankAccount)){
-            if(!is_null($bankAccount->getCompany())) {
+        } elseif (!is_null($bankAccount)) {
+            if (!is_null($bankAccount->getCompany())) {
                 $cyberSourceBillingAddress->firstName = 'NA';
                 $cyberSourceBillingAddress->lastName = $bankAccount->getCompany();
                 $cyberSourceBillingAddress->company = $bankAccount->getCompany();
@@ -227,49 +225,49 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
                 $cyberSourceBillingAddress->lastName = $bankAccount->getBillingLastName();
             }
 
-            if(!is_null($bankAccount->getBillingAddress1())) {
+            if (!is_null($bankAccount->getBillingAddress1())) {
                 $cyberSourceBillingAddress->street1 = $bankAccount->getBillingAddress1();
             }
 
-            if(!is_null($bankAccount->getBillingAddress2())) {
+            if (!is_null($bankAccount->getBillingAddress2())) {
                 $cyberSourceBillingAddress->street2 = $bankAccount->getBillingAddress2();
             }
 
-            if(!is_null($bankAccount->getBillingCity())) {
+            if (!is_null($bankAccount->getBillingCity())) {
                 $cyberSourceBillingAddress->city = $bankAccount->getBillingCity();
             }
 
-            if(!is_null($bankAccount->getBillingState())) {
+            if (!is_null($bankAccount->getBillingState())) {
                 $cyberSourceBillingAddress->state = $bankAccount->getBillingState();
             }
 
-            if(!is_null($bankAccount->getBillingPostcode())) {
+            if (!is_null($bankAccount->getBillingPostcode())) {
                 $cyberSourceBillingAddress->postalCode = $bankAccount->getBillingPostcode();
             }
 
-            if(!is_null($bankAccount->getBillingCountry())) {
+            if (!is_null($bankAccount->getBillingCountry())) {
                 $cyberSourceBillingAddress->country = $bankAccount->getBillingCountry();
             }
 
-            if(!is_null($bankAccount->getEmail())) {
+            if (!is_null($bankAccount->getEmail())) {
                 $cyberSourceBillingAddress->email = $bankAccount->getEmail();
             }
 
-            if(!is_null($bankAccount->getBillingPhone())) {
+            if (!is_null($bankAccount->getBillingPhone())) {
                 $cyberSourceBillingAddress->phoneNumber = $bankAccount->getBillingPhone();
             }
-
         }
 
         return $cyberSourceBillingAddress;
     }
 
-    private function addWsseToken (\SoapClient $soap ) {
+    private function addWsseToken(\SoapClient $soap)
+    {
         $wsse_namespace = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd';
         $type_namespace = 'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText';
 
-        $user = new \SoapVar( $this->getMerchantId(), XSD_STRING, null, $wsse_namespace, null, $wsse_namespace );
-        $pass = new \SoapVar( $this->getTransactionKey(), XSD_STRING, null, $type_namespace, null, $wsse_namespace );
+        $user = new \SoapVar($this->getMerchantId(), XSD_STRING, null, $wsse_namespace, null, $wsse_namespace);
+        $pass = new \SoapVar($this->getTransactionKey(), XSD_STRING, null, $type_namespace, null, $wsse_namespace);
 
         // create the username token container object
         $username_token = new \stdClass();
@@ -277,21 +275,20 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
         $username_token->Password = $pass;
 
         // convert the username token object into a soap var
-        $username_token = new \SoapVar( $username_token, SOAP_ENC_OBJECT, null, $wsse_namespace, 'UsernameToken', $wsse_namespace );
+        $username_token = new \SoapVar($username_token, SOAP_ENC_OBJECT, null, $wsse_namespace, 'UsernameToken', $wsse_namespace);
 
         // create the security container object
         $security = new \stdClass();
         $security->UsernameToken = $username_token;
 
         // convert the security container object into a soap var
-        $security = new \SoapVar( $security, SOAP_ENC_OBJECT, null, $wsse_namespace, 'Security', $wsse_namespace );
+        $security = new \SoapVar($security, SOAP_ENC_OBJECT, null, $wsse_namespace, 'Security', $wsse_namespace);
 
         // create the header out of the security soap var
-        $header = new \SoapHeader( $wsse_namespace, 'Security', $security, true );
+        $header = new \SoapHeader($wsse_namespace, 'Security', $security, true);
 
         // add the headers to the soap client
-        $soap->__setSoapHeaders( $header );
-        var_dump("Soap Header", $header);
+        $soap->__setSoapHeaders($header);
     }
 
 
@@ -414,31 +411,4 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     }
 
     #endregion
-
 }
-
-class CyberSource_Exception extends \Exception
-{
-}
-
-class CyberSource_Error_Exception extends CyberSource_Exception
-{
-}
-
-class CyberSource_Declined_Exception extends CyberSource_Exception
-{
-}
-
-class CyberSource_Connection_Exception extends CyberSource_Exception
-{
-}
-
-class CyberSource_Invalid_Field_Exception extends CyberSource_Exception
-{
-}
-
-class CyberSource_Missing_Field_Exception extends CyberSource_Exception
-{
-}
-
-

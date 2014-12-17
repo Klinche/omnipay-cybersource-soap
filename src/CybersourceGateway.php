@@ -9,7 +9,6 @@ use Omnipay\Common\AbstractGateway;
  */
 class CybersourceGateway extends AbstractGateway
 {
-
     /* Default Abstract Gateway methods that need to be overridden */
     public function getName()
     {
@@ -18,7 +17,6 @@ class CybersourceGateway extends AbstractGateway
 
     public function getDefaultParameters()
     {
-
         return array(
             'merchantId' => 'myMerchantId',
             'transactionKey' => 'myTransactionKey',
@@ -89,6 +87,4 @@ class CybersourceGateway extends AbstractGateway
     {
         return $this->createRequest('\Omnipay\Cybersource\Message\PurchaseRequest', $parameters);
     }
-
-
 }
