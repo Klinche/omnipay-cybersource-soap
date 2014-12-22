@@ -34,7 +34,7 @@ class ReportRequest extends AbstractRequest
 
     public function sendData($data)
     {
-        $url = 'https://'.$this->getUsername().':'.$this->getPassword().'@'.$this->getEndpoint().$this->getReportDate()->format('Y/m/').$this->getMerchantId().'/'.$this->reportType.'.csv';
+        $url = 'https://'.$this->getUsername().':'.$this->getPassword().'@'.$this->getEndpoint().$this->getReportDate()->format('Y/m/d/').$this->getMerchantId().'/'.$this->reportType.'.csv';
 
         $handle = null;
 

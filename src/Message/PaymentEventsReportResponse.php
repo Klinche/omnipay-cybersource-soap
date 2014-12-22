@@ -10,12 +10,12 @@ use Omnipay\Common\Message\AbstractResponse;
  * Time: 10:38 PM
  */
 
-class TransactionDetailReportResponse extends AbstractResponse
+class PaymentEventsReportResponse extends AbstractResponse
 {
     /** @var null|\Exception  */
     protected $error = null;
 
-    /** @var TransactionDetailReportRequest */
+    /** @var PaymentEventsReportRequest */
     protected $request = null;
 
     public function __construct($request, $error = null)

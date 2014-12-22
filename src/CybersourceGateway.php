@@ -21,6 +21,7 @@ class CybersourceGateway extends AbstractGateway
             'merchantId' => 'myMerchantId',
             'transactionKey' => 'myTransactionKey',
             'username' => 'myUsername',
+            'password' => 'myPassword',
         );
     }
 
@@ -61,6 +62,24 @@ class CybersourceGateway extends AbstractGateway
     }
 
     /**
+     * @param string $password
+     * @return $this
+     */
+    public function setPassword($password)
+    {
+        $this->setParameter('password', $password);
+        return $this;
+    }
+
+    /**
+     * return string
+     */
+    public function getPassword()
+    {
+        return $this->getParameter('password');
+    }
+
+    /**
      * @param string $transactionKey
      * @return $this
      */
@@ -95,5 +114,14 @@ class CybersourceGateway extends AbstractGateway
     public function transactionDetailReport(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\Cybersource\Message\TransactionDetailReportRequest', $parameters);
+    }
+
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Cybersource\Message\PaymentEventsReportRequest
+     */
+    public function paymentEventsReport(array $parameters = array())
+    {
+        return $this->createRequest('\Omnipay\Cybersource\Message\PaymentEventsReportRequest', $parameters);
     }
 }
