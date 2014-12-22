@@ -1,5 +1,6 @@
 <?php
 namespace Omnipay\Cybersource\Message;
+
 use Omnipay\Common\Message\AbstractResponse;
 
 /**
@@ -17,7 +18,8 @@ class TransactionDetailReportResponse extends AbstractResponse
     /** @var TransactionDetailReportRequest */
     protected $request = null;
 
-    public function __construct($request, $error = null) {
+    public function __construct($request, $error = null)
+    {
         $this->request = $request;
         $this->error = $error;
         $this->parseResponseData();
@@ -36,13 +38,11 @@ class TransactionDetailReportResponse extends AbstractResponse
 
     private function parseResponseData()
     {
-        if(!$this->isSuccessful()) {
+        if (!$this->isSuccessful()) {
             return;
         }
 
 
 
     }
-
-
 }

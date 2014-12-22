@@ -40,7 +40,7 @@ class ReportRequest extends AbstractRequest
 
         try {
             $handle = fopen($url, "r");
-        } catch(\Exception $error) {
+        } catch (\Exception $error) {
             return $error;
         }
 
@@ -48,15 +48,15 @@ class ReportRequest extends AbstractRequest
         $rowCounter = 0;
         $assocData = array();
         $headerRecord = null;
-        while (($rowData = fgetcsv($handle, 0, ",")) !== FALSE) {
-            if($flag) {
+        while (($rowData = fgetcsv($handle, 0, ",")) !== false) {
+            if ($flag) {
                 $flag = false;
                 continue;
             }
-            if( 0 === $rowCounter) {
+            if (0 === $rowCounter) {
                 $headerRecord = $rowData;
             } else {
-                foreach( $rowData as $key => $value) {
+                foreach ($rowData as $key => $value) {
                     $assocData[ $rowCounter - 1][ $headerRecord[ $key] ] = $value;
                 }
             }

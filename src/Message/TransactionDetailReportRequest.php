@@ -17,12 +17,11 @@ class TransactionDetailReportRequest extends ReportRequest
     {
         $returnData = parent::sendData($data);
 
-        if($returnData instanceof \Exception) {
+        if ($returnData instanceof \Exception) {
             return new TransactionDetailReportResponse($this, $returnData);
         } else {
             return new TransactionDetailReportResponse($this);
         }
 
     }
-
 }
