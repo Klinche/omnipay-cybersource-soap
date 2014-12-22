@@ -330,6 +330,22 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
     }
 
     /**
+     * @param string $password
+     */
+    public function setPassword($password)
+    {
+        $this->setParameter('password', $password);
+    }
+
+    /**
+     * return string
+     */
+    public function getPassword()
+    {
+        return $this->getParameter('password');
+    }
+
+    /**
      * @param string $transactionKey
      */
     public function setTransactionKey($transactionKey)

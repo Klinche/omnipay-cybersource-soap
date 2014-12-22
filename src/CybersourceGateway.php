@@ -87,4 +87,13 @@ class CybersourceGateway extends AbstractGateway
     {
         return $this->createRequest('\Omnipay\Cybersource\Message\PurchaseRequest', $parameters);
     }
+
+    /**
+     * @param array $parameters
+     * @return \Omnipay\Cybersource\Message\TransactionDetailReportRequest
+     */
+    public function transactionDetailReport(array $parameters = array())
+    {
+        return $this->createRequest('\Omnipay\Cybersource\Message\TransactionDetailReportRequest', $parameters);
+    }
 }
