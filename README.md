@@ -20,7 +20,7 @@ to your `composer.json` file:
 ```json
 {
     "require": {
-        "dabsquared/omnipay-cybersource-soap": "dev-master"
+        "dabsquared/omnipay-cybersource-soap": "@stable"
     }
 }
 ```
