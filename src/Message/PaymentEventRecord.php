@@ -9,7 +9,8 @@
 namespace Omnipay\Cybersource\Message;
 
 
-class PaymentEventRecord {
+class PaymentEventRecord
+{
 
     /** @var null|string  */
     private $requestId = null;
@@ -276,6 +277,4 @@ class PaymentEventRecord {
     {
         $this->processorMessage = $processorMessage;
     }
-
-
 }

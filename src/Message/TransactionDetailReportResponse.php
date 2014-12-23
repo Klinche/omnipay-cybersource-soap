@@ -42,7 +42,7 @@ class TransactionDetailReportResponse extends AbstractResponse
             return;
         }
 
-        if(is_null($this->request->reportData)) {
+        if (is_null($this->request->reportData)) {
             return;
         }
 
