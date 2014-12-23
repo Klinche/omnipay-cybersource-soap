@@ -6,7 +6,7 @@ use DOMDocument;
 use SimpleXMLElement;
 
 /**
- * Cybersource Payments Report Request
+ * Cybersource Payment Events Report Request
  */
 class PaymentEventsReportRequest extends ReportRequest
 {
@@ -18,9 +18,9 @@ class PaymentEventsReportRequest extends ReportRequest
         $returnData = parent::sendData($data);
 
         if ($returnData instanceof \Exception) {
-            return new TransactionDetailReportResponse($this, $returnData);
+            return new PaymentEventsReportResponse($this, $returnData);
         } else {
-            return new TransactionDetailReportResponse($this);
+            return new PaymentEventsReportResponse($this);
         }
 
     }

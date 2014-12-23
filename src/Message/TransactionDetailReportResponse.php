@@ -42,5 +42,12 @@ class TransactionDetailReportResponse extends AbstractResponse
             return;
         }
 
+        if(is_null($this->request->reportData)) {
+            return;
+        }
+
+        foreach ($this->request->reportData as $data) {
+
+        }
     }
 }

@@ -15,7 +15,7 @@ class ReportRequest extends AbstractRequest
 
     protected $reportType = '';
 
-    protected $reportData = null;
+    public $reportData = null;
 
     public function getReportDate()
     {

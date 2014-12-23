@@ -61,18 +61,6 @@ class CybersourceGatewayTest extends GatewayTestCase
 
         if($defaultOptions['merchantId'] != '' && $defaultOptions['username'] != '' && $defaultOptions['transactionKey'] != '' && $defaultOptions['password'] != '') {
 
-//            $reportOptions = array(
-//                'reportDate' => new \DateTime('12/17/2014'),
-//            );
-//
-//            /** @var \Omnipay\Cybersource\Message\TransactionDetailReportRequest $request */
-//           $request = $this->gateway->transactionDetailReport(array_merge($defaultOptions, $reportOptions));
-//
-//            /** @var \Omnipay\Cybersource\Message\TransactionDetailReportResponse $response */
-//           $response = $request->send();
-//           $this->assertEquals(true, $response->isSuccessful());
-
-
             $purchaseOptions = array(
                 'amount' => '12.00',
                 'card' => $creditCard,
@@ -100,6 +88,22 @@ class CybersourceGatewayTest extends GatewayTestCase
             $response = $request->send();
 
             $this->assertEquals(true, $response->isSuccessful());
+
+
+            $reportOptions = array(
+                'reportDate' => new \DateTime('12/17/2014'),
+            );
+
+            /** @var \Omnipay\Cybersource\Message\TransactionDetailReportRequest $request */
+            $request = $this->gateway->transactionDetailReport(array_merge($defaultOptions, $reportOptions));
+
+            /** @var \Omnipay\Cybersource\Message\TransactionDetailReportResponse $response */
+            $response = $request->send();
+
+
+            $this->assertEquals(true, $response->isSuccessful());
+
+
         }
 
 
