@@ -59,8 +59,7 @@ class CybersourceGatewayTest extends GatewayTestCase
             'transactionKey' => ''
         );
 
-        if($defaultOptions['merchantId'] != '' && $defaultOptions['username'] != '' && $defaultOptions['transactionKey'] != '' && $defaultOptions['password'] != '') {
-
+        if ($defaultOptions['merchantId'] != '' && $defaultOptions['username'] != '' && $defaultOptions['transactionKey'] != '' && $defaultOptions['password'] != '') {
             $purchaseOptions = array(
                 'amount' => '12.00',
                 'card' => $creditCard,
@@ -72,8 +71,6 @@ class CybersourceGatewayTest extends GatewayTestCase
 
             /** @var \Omnipay\Cybersource\Message\CybersourceResponse $response */
             $response = $request->send();
-
-            var_dump($response->getCybersourceRequestId());
 
             $this->assertEquals(true, $response->isSuccessful());
 
@@ -102,11 +99,6 @@ class CybersourceGatewayTest extends GatewayTestCase
 
 
             $this->assertEquals(true, $response->isSuccessful());
-
-
         }
-
-
-
     }
 }
