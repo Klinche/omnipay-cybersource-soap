@@ -2,11 +2,11 @@
 
 **Cybersource driver for the Omnipay PHP payment processing library**
 
-[![Build Status](https://travis-ci.org/DABSquared/omnipay-cybersource-soap.svg?branch=master)](https://travis-ci.org/dabsquared/omnipay-cybersource-soap)
-[![Latest Stable Version](https://poser.pugx.org/dabsquared/omnipay-cybersource-soap/v/stable.svg)](https://packagist.org/packages/dabsquared/omnipay-cybersource-soap)
-[![Latest Unstable Version](https://poser.pugx.org/dabsquared/omnipay-cybersource-soap/v/unstable.svg)](https://packagist.org/packages/dabsquared/omnipay-cybersource-soap)
-[![Total Downloads](https://poser.pugx.org/dabsquared/omnipay-cybersource-soap/downloads.svg)](https://packagist.org/packages/dabsquared/omnipay-cybersource-soap)
-[![License](https://poser.pugx.org/dabsquared/omnipay-cybersource-soap/license.svg)](https://packagist.org/packages/dabsquared/omnipay-cybersource-soap)
+[![Build Status](https://travis-ci.org/Klinche/omnipay-cybersource-soap.svg?branch=master)](https://travis-ci.org/klinche/omnipay-cybersource-soap)
+[![Latest Stable Version](https://poser.pugx.org/klinche/omnipay-cybersource-soap/v/stable.svg)](https://packagist.org/packages/klinche/omnipay-cybersource-soap)
+[![Latest Unstable Version](https://poser.pugx.org/klinche/omnipay-cybersource-soap/v/unstable.svg)](https://packagist.org/packages/klinche/omnipay-cybersource-soap)
+[![Total Downloads](https://poser.pugx.org/klinche/omnipay-cybersource-soap/downloads.svg)](https://packagist.org/packages/klinche/omnipay-cybersource-soap)
+[![License](https://poser.pugx.org/klinche/omnipay-cybersource-soap/license.svg)](https://packagist.org/packages/klinche/omnipay-cybersource-soap)
 
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
@@ -20,7 +20,7 @@ to your `composer.json` file:
 ```json
 {
     "require": {
-        "dabsquared/omnipay-cybersource-soap": "@stable"
+        "klinche/omnipay-cybersource-soap": "@stable"
     }
 }
 ```
