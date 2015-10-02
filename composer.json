@@ -1,5 +1,5 @@
 {
-    "name": "dabsquared/omnipay-cybersource-soap",
+    "name": "klinche/omnipay-cybersource-soap",
     "type": "library",
     "description": "Cybersource support for Omnipay payment processing library",
     "keywords": [
@@ -12,16 +12,16 @@
         "purchase",
         "soap"
     ],
-    "homepage": "https://github.com/DABSquared/omnipay-cybersource-soap",
+    "homepage": "https://github.com/Klinche/omnipay-cybersource-soap",
     "license": "MIT",
     "authors": [
         {
             "name": "Michael Brooks",
-            "email": "michael_brooks@dabsquared.com"
+            "email": "mbrooks@klinche.com"
         },
         {
-            "name": "DABSquared",
-            "homepage": "https://github.com/DABSquared"
+            "name": "Klinche",
+            "homepage": "https://github.com/Klinche"
         }
     ],
     "autoload": {
