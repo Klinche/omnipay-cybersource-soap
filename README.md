@@ -1,6 +1,6 @@
-# Omnipay: Cybersource
+# Omnipay: Cybersource-SOAP
 
-**Cybersource driver for the Omnipay PHP payment processing library**
+**Cybersource-SOAP driver for the Omnipay PHP payment processing library**
 
 [![Build Status](https://travis-ci.org/Klinche/omnipay-cybersource-soap.svg?branch=master)](https://travis-ci.org/klinche/omnipay-cybersource-soap)
 [![Latest Stable Version](https://poser.pugx.org/klinche/omnipay-cybersource-soap/v/stable.svg)](https://packagist.org/packages/klinche/omnipay-cybersource-soap)
@@ -10,7 +10,7 @@
 
 
 [Omnipay](https://github.com/thephpleague/omnipay) is a framework agnostic, multi-gateway payment
-processing library for PHP 5.3+. This package implements 2Checkout support for Omnipay.
+processing library for PHP 5.3+. This package implements Cybersource-SOAP support for Omnipay.
 
 ## Installation
 
@@ -34,7 +34,7 @@ And run composer to update your dependencies:
 
 The following gateways are provided by this package:
 
-* Cybersource
+* Cybersource-SOAP
 
 For general usage instructions, please see the main [Omnipay](https://github.com/thephpleague/omnipay)
 repository.
